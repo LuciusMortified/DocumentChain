@@ -64,18 +64,10 @@ body {
 
 .form-signin, .form-signup {
     max-width: 330px;
-    padding-top: 15%;
-    margin: 0 auto;
 }
 
 .form-signin .form-signin-error, .form-signup .form-signup-error {
     color: #b21f2d;
-}
-
-.form-signin .form-signin-heading,
-.form-signin .checkbox,
-.form-signup .form-signup-heading {
-    margin-bottom: 10px;
 }
 
 .form-signin .checkbox {
@@ -112,7 +104,7 @@ body {
     border-radius: .25rem .25rem 0 0;
 }
 
-.form-signup input:nth-child(6) {
+.form-signup input[name='repassword'] {
     margin-bottom: -1px !important;
     border-radius: 0 !important;
 }

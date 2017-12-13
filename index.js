@@ -476,6 +476,8 @@ win.on('loaded', () => {
     $('#modalKeyAdd .btn-primary').click(() => {
         let key_name = $('#modalKeyAdd input[name="name"]').val();
         let key = $('#modalKeyAdd input[name="key"]').val();
+        if(key_name === '' || key === '')
+            return;
         let obj_key = {
             name: key_name,
             key: key
@@ -485,6 +487,30 @@ win.on('loaded', () => {
         }
         $('#modalKeyAdd').modal('hide');
         loadSettings();
+    });
+
+    $('.profile .change-password').submit(function () {
+        event.preventDefault();
+        let cur_pass_val = $(this).find('input[name="current"]').val();
+        let new_pass_val = $(this).find('input[name="new"]').val();
+        let re_new_pass_val = $(this).find('input[name="renew"]').val();
+        if(cur_pass_val === PASSWORD && new_pass_val === re_new_pass_val) {
+            PASSWORD = new_pass_val;
+            let data = CryptoJS.AES.encrypt(JSON.stringify(LOCALSTORAGE), PASSWORD);
+            fs.writeFile(LOGIN+'.dat', data,(err) => {
+                if(err)
+                    return console.error(err);
+            });
+        }
+    });
+
+    $('.profile .delete-account').click(function () {
+        fs.unlink(LOGIN+'.dat', function (err) {
+            if(err)
+                return console.error(err);
+            $('#main').addClass('d-none');
+            $('.form-signin').removeClass('d-none');
+        });
     });
 
     setInterval(function () {
@@ -537,15 +563,15 @@ function loadDocuments() {
             $(tdActions).css('float','right');
 
             $(tdActions).append(
-                '<button class="btn btn-sm btn-dark mr-1" onclick="saveFile('+block+')"><i class="material-icons">&#xE2C4;</i></input>'
+                '<button class="btn btn-sm btn-dark mr-1 mb-1" onclick="saveFile('+block+')"><i class="material-icons">&#xE2C4;</i></input>'
             );
 
             let description = blockchain[block].data.description || 'None.';
-            let desc_popover = $('<button class="btn btn-sm btn-dark mr-1" data-placement="left" data-toggle="popover" title="File description" data-content=\"'+description+'\"><i class="material-icons">&#xE873;</i></button>');
+            let desc_popover = $('<button class="btn btn-sm btn-dark mr-1 mb-1" data-placement="left" data-toggle="popover" title="File description" data-content=\"'+description+'\"><i class="material-icons">&#xE873;</i></button>');
             desc_popover.popover();
             $(tdActions).append( desc_popover );
 
-            let visited_btn = $('<button class="btn btn-sm btn-dark visit-doc'+block+'"><i class="material-icons">'+(blockchain[block].visited?'&#xE8F5':'&#xE8F4')+'</i></button>');
+            let visited_btn = $('<button class="btn btn-sm btn-dark mb-1 visit-doc'+block+'"><i class="material-icons">'+(blockchain[block].visited?'&#xE8F5':'&#xE8F4')+'</i></button>');
             visited_btn.click(function () {
                 blockchain[block].visited = !blockchain[block].visited;
                 let icon = blockchain[block].visited?'&#xE8F5':'&#xE8F4';
@@ -656,6 +682,8 @@ function saveFile(block) {
 
 win.on('closed', () => {
     fs.writeFile(config.blockchainFile, JSON.stringify(blockchain));
+    if(!LOGIN || !LOCALSTORAGE || !PASSWORD)
+        return;
     let data = CryptoJS.AES.encrypt(JSON.stringify(LOCALSTORAGE), PASSWORD);
     fs.writeFile(LOGIN+'.dat', data,(err) => {
         if(err) return console.error(err);

@@ -13,33 +13,31 @@
                 <img src="./img/spinner.gif" alt="">
                 <p>Loading</p>
             </div>
-            <form class="form-signin d-none">
-                <h2 class="form-signin-heading">Please sign in</h2>
-                <p class="form-signin-error"></p>
-                <label for="inputLogin" class="sr-only">Login</label>
-                <input type="text" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <!--<div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me">
-                        Remember me
-                    </label>
-                </div>-->
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                <button id="registerButton" class="btn btn-lg btn-outline-dark btn-block" type="button">Register</button>
+            <form class="form-signin d-none text-center card mt-2 ml-auto mr-auto">
+                <h2 class="form-signin-heading card-header">Authorization</h2>
+                <div class="card-body">
+                    <p class="form-signin-error card-text"></p>
+                    <label for="inputLogin" class="sr-only">Login</label>
+                    <input type="text" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                    <button class="btn btn-lg btn-outline-primary float-left" type="submit">Sign in</button>
+                    <button id="registerButton" class="btn btn-lg btn-outline-dark float-right" type="button">Register</button>
+                </div>
             </form>
-            <form class="form-signup d-none">
-                <h2 class="form-signup-heading">Sign up</h2>
-                <p class="form-signup-error"></p>
-                <label for="inputLoginReg" class="sr-only">Login</label>
-                <input type="text" id="inputLoginReg" class="form-control" placeholder="Login" required autofocus>
-                <label for="inputPasswordReg" class="sr-only">Password</label>
-                <input type="password" id="inputPasswordReg" class="form-control" placeholder="Password" required>
-                <label for="inputRePasswordReg" class="sr-only">Password</label>
-                <input type="password" id="inputRePasswordReg" class="form-control" placeholder="Repeat password" required>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
-                <button id="registerBackButton" class="btn btn-lg btn-outline-primary btn-block" type="button">Back</button>
+            <form class="form-signup d-none text-center card mt-2 ml-auto mr-auto">
+                <h2 class="form-signup-heading card-header">Registration</h2>
+                <div class="card-body">
+                    <p class="form-signup-error card-text"></p>
+                    <label for="inputLoginReg" class="sr-only">Login</label>
+                    <input type="text" id="inputLoginReg" class="form-control" placeholder="Login" required autofocus>
+                    <label for="inputPasswordReg" class="sr-only">Password</label>
+                    <input name="repassword" type="password" id="inputPasswordReg" class="form-control" placeholder="Password" required>
+                    <label for="inputRePasswordReg" class="sr-only">Password</label>
+                    <input type="password" id="inputRePasswordReg" class="form-control" placeholder="Repeat password" required>
+                    <button class="btn btn-lg btn-outline-primary float-left" type="submit">Sign up</button>
+                    <button id="registerBackButton" class="btn btn-lg btn-outline-secondary float-right" type="button">Back</button>
+                </div>
             </form>
         </div>
 
@@ -75,9 +73,15 @@
                         <button class="btn btn-primary btn-md refresh">Refresh</button>
                     </nav>-->
                     <main role="main" class="col-sm-9 mr-sm-auto ml-sm-auto col-md-9 pt-5">
-                        <h3>Dashboard info</h3>
-                        <p>Peers in network: <span id="peersCount"></span></p>
-                        <p>Documents in chain: <span id="docsCount"></span></p>
+                        <div class="card">
+                            <div class="card-header">
+                                Dashboard info
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Peers in network:   <code><span id="peersCount"></span></code></p>
+                                <p class="card-text">Documents in chain: <code><span id="docsCount"></span></code></p>
+                            </div>
+                        </div>
                     </main>
                 </div>
             </div>
@@ -144,8 +148,23 @@
                 </main>
             </div>
             <div class="container-fluid menu-tab profile">
-                <main role="main" class="col-sm-9 mr-sm-auto ml-sm-auto col-md-9 pt-5">
-                    
+                <main role="main" class="col-sm-6 mr-sm-auto ml-sm-auto col-md-6 pt-5">
+                    <form class="card change-password mb-2">
+                        <div class="card-header">Change password</div>
+                        <div class="card-body">
+                            <input name="current" type="password" class="form-control mb-2" placeholder="Current password" required>
+                            <input name="new" type="password" class="form-control mb-2" placeholder="New password" required>
+                            <input name="renew" type="password" class="form-control mb-2" placeholder="Repeat new password" required>
+                            <button type="submit" class="btn btn-primary btn-sm">Change</button>
+                        </div>
+                    </form>
+                    <div class="card">
+                        <div class="card-header">Deleting account</div>
+                        <div class="card-body text-center">
+                            <p class="card-text">Are you really want this?</p>
+                            <button class="btn btn-danger btn-sm mr-auto ml-auto delete-account">Delete account!</button>
+                        </div>
+                    </div>
                 </main>
             </div>
         </div>
@@ -160,14 +179,14 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body text-center">
                         <p class="modal-error text-danger"></p>
-                        <div class="d-block position-relative ml-5 mr-5 col-9 mb-2 dropdown-menu">
+                        <div class="float-none d-block position-relative ml-auto mr-auto col-9 mb-2 dropdown-menu">
                             <h6 class="dropdown-header">Encryption ~v</h6>
                             <a href="#" class="dropdown-item active" level=-1>None</a>
                         </div>
-                        <input class="col-9 ml-5 mr-5 p-0 mb-2" type="file" accept="application/msword,.doc,.docx,.xls,.txt,.odt" required>
-                        <textarea class="col-9 p-1 ml-5 mr-5" name="description" placeholder="File description"></textarea>
+                        <input class="col-9 ml-auto mr-auto p-0 mb-2" type="file" accept="application/msword,.doc,.docx,.xls,.txt,.odt" required>
+                        <textarea class="col-9 p-1 ml-auto mr-auto" name="description" placeholder="File description"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary">Add</button>
@@ -185,8 +204,8 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <input class="m-auto w-75" type="text" placeholder="ws://{ipaddress}:{port} like (ws://127.0.0.1:6192)">
+                    <div class="modal-body text-center">
+                        <input class="col-9 ml-auto mr-auto p-1 mb-2" type="text" placeholder="ws://{ipaddress}:{port} like (ws://127.0.0.1:6192)">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary">Add</button>
@@ -204,9 +223,9 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <input name="name" class="m-auto w-75" type="text" placeholder="Name">
-                        <input name="key" class="m-auto w-75" type="text" placeholder="Key">
+                    <div class="modal-body text-center">
+                        <input name="name" class="col-9 ml-auto mr-auto p-1 mb-2" type="text" placeholder="Name">
+                        <input name="key" class="col-9 ml-auto mr-auto p-1 mb-2" type="text" placeholder="Key">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary">Add</button>
