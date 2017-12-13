@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>DocumentChain</title>
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="loading">
+                <img src="./img/spinner.gif" alt="">
+                <p>Loading</p>
+            </div>
+            <form class="form-signin d-none">
+                <h2 class="form-signin-heading">Please sign in</h2>
+                <p class="form-signin-error"></p>
+                <label for="inputLogin" class="sr-only">Login</label>
+                <input type="text" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <!--<div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me">
+                        Remember me
+                    </label>
+                </div>-->
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                <button id="registerButton" class="btn btn-lg btn-outline-dark btn-block" type="button">Register</button>
+            </form>
+            <form class="form-signup d-none">
+                <h2 class="form-signup-heading">Sign up</h2>
+                <p class="form-signup-error"></p>
+                <label for="inputLoginReg" class="sr-only">Login</label>
+                <input type="text" id="inputLoginReg" class="form-control" placeholder="Login" required autofocus>
+                <label for="inputPasswordReg" class="sr-only">Password</label>
+                <input type="password" id="inputPasswordReg" class="form-control" placeholder="Password" required>
+                <label for="inputRePasswordReg" class="sr-only">Password</label>
+                <input type="password" id="inputRePasswordReg" class="form-control" placeholder="Repeat password" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+                <button id="registerBackButton" class="btn btn-lg btn-outline-primary btn-block" type="button">Back</button>
+            </form>
+        </div>
+
+        <div id="main" class="d-none">
+            <header>
+                    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                        <a href="#" class="navbar-brand">Dashboard</a>
+                        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbars">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item" menu="documents">
+                                    <a href="#" class="nav-link">Documents</a>
+                                </li>
+                                <li class="nav-item" menu="settings">
+                                    <a href="#" class="nav-link">Settings</a>
+                                </li>
+                                <li class="nav-item" menu="profile">
+                                    <a href="#" class="nav-link">Profile</a>
+                                </li>
+                            </ul>
+                            <div class="mt-2 mt-md-0 float-right">
+                                <p class="login d-inline-block mb-0 pr-1"></p>
+                                <a href="#" class="logout">Log out</a>
+                            </div>
+                        </div>
+                    </nav>
+            </header>
+            <div class="container-fluid menu-tab dashboard">
+                <div class="row">
+                    <!--<nav class="col-sm-3 col-md-3 d-none d-sm-block sidebar">
+                        <button class="btn btn-primary btn-md refresh">Refresh</button>
+                    </nav>-->
+                    <main role="main" class="col-sm-9 mr-sm-auto ml-sm-auto col-md-9 pt-5">
+                        <h3>Dashboard info</h3>
+                        <p>Peers in network: <span id="peersCount"></span></p>
+                        <p>Documents in chain: <span id="docsCount"></span></p>
+                    </main>
+                </div>
+            </div>
+            <div class="container-fluid menu-tab documents">
+                <div class="row">
+                    <input class="d-none" id="savefile" type="file" nwsaveas>
+                    <nav class="col-sm-1 col-md-1 d-sm-block d-md-block pt-sm-5 pt-md-5 pb-2 pt-4">
+                        <button class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target="#modalDocumentAdd">
+                            <i class="material-icons">&#xE145;</i>
+                        </button>
+                        <button class="btn btn-outline-dark btn-sm mb-1 is-visited">
+                            <i class="material-icons not-visited">&#xE8F5;</i>
+                            <i class="material-icons and-visited">&#xE8F4;</i>
+                        </button>
+                    </nav>
+                    <main role="main" class="col-sm-11 ml-sm-auto col-md-11 mt-sm-5 mt-md-5 mt-1">
+                        <h2>Documents</h2>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Access level</th>
+                                        <th>Filename</th>
+                                        <!--<th>Date</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </main>
+                </div>
+            </div>
+            <div class="container-fluid menu-tab settings">
+                <main role="main" class="col-sm-9 mr-sm-auto ml-sm-auto col-md-9 pt-5">
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            Static peers
+                        </div>
+                        <div class="card-body">
+                            <div class="card-text mb-1">Peers that will be written to the file and read each time the program is started</div>
+                            <button class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target="#modalPeerAdd">Add peer</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            Keys
+                        </div>
+                        <div class="card-body">
+                            <div class="card-text mb-1">
+                                Encryption keys
+                            </div>
+                            <ul class="list-group mb-2 keys-list">
+                                <li class="list-group-item">
+                                    <p class="d-inline-block">My Department</p>
+                                    <button class="btn btn-primary btn-sm float-right d-inline-block">Remove</button>
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target="#modalKeyAdd">Add key</button>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <div class="container-fluid menu-tab profile">
+                <main role="main" class="col-sm-9 mr-sm-auto ml-sm-auto col-md-9 pt-5">
+                    
+                </main>
+            </div>
+        </div>
+
+        <!-- MODALS -->
+        <div id="modalDocumentAdd" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add new document in chain</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="modal-error text-danger"></p>
+                        <div class="d-block position-relative ml-5 mr-5 col-9 mb-2 dropdown-menu">
+                            <h6 class="dropdown-header">Encryption ~v</h6>
+                            <a href="#" class="dropdown-item active" level=-1>None</a>
+                        </div>
+                        <input class="col-9 ml-5 mr-5 p-0 mb-2" type="file" accept="application/msword,.doc,.docx,.xls,.txt,.odt" required>
+                        <textarea class="col-9 p-1 ml-5 mr-5" name="description" placeholder="File description"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modalPeerAdd" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add static peer</h5>
+                        <button class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input class="m-auto w-75" type="text" placeholder="ws://{ipaddress}:{port} like (ws://127.0.0.1:6192)">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modalKeyAdd" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add new encryption key</h5>
+                        <button class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input name="name" class="m-auto w-75" type="text" placeholder="Name">
+                        <input name="key" class="m-auto w-75" type="text" placeholder="Key">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="./node_modules/popper.js/dist/umd/popper.min.js"></script>
+        <script src="./js/bootstrap.min.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>

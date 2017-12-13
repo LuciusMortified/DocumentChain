@@ -1,0 +1,149 @@
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(./MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: local('Material Icons'),
+    local('MaterialIcons-Regular'),
+    url(./MaterialIcons-Regular.woff2) format('woff2'),
+    url(./MaterialIcons-Regular.woff) format('woff'),
+    url(./MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+
+    cursor: pointer;
+}
+
+body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
+}
+
+.login {
+    color: #eeeeee;
+}
+
+.loading {
+    max-width: 330px;
+    padding-top: 15%;
+    margin: 0 auto;
+}
+
+.loading img {
+    position: inherit;
+    width: 100%;
+}
+
+.loading p {
+    text-align: center;
+}
+
+.form-signin, .form-signup {
+    max-width: 330px;
+    padding-top: 15%;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-error, .form-signup .form-signup-error {
+    color: #b21f2d;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox,
+.form-signup .form-signup-heading {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-control, .form-signup .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus,
+.form-signup .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.form-signup input[type="text"] {
+    margin-bottom: -1px;
+    border-radius: .25rem .25rem 0 0;
+}
+
+.form-signup input:nth-child(6) {
+    margin-bottom: -1px !important;
+    border-radius: 0 !important;
+}
+
+.form-signup input[type="password"] {
+    margin-bottom: 10px;
+    border-radius: 0 0 .25rem .25rem;
+}
+
+.sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 20px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: lightgrey;
+    border-right: 1px solid #343a40;
+    text-align: center;
+}
+
+main p {
+    margin-bottom: 5px;
+}
+
+.is-visited:not(.active) i.and-visited {
+    display: none;
+}
+
+.is-visited.active i.not-visited {
+    display: none;
+}
